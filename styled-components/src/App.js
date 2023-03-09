@@ -71,31 +71,47 @@ const Btn = styled.button`
 const Input = styled.input.attrs({ required: true, minLength: 5 })`
   background-color: bisque;
 `;
+const Title = styled.h1`
+  color: ${(props) => props.theme.textColor};
+`;
+const Wrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.backgroundColor};
+`;
 function App() {
   return (
-    <Father>
-      <Box bgColor="teal">
-        <Text>Hello</Text>
-      </Box>
-      <Circle bgColor="tomato" />
-      <Btn>Log in</Btn>
-      <Btn as="a" href="/">
-        Log in
-      </Btn>
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Box2 bgColor="black">
-        <Emoji>😄</Emoji>
-      </Box2>
-      <Emoji>🔥</Emoji>
-      <Emoji>🔥</Emoji>
-      <Emoji>🔥</Emoji>
-    </Father>
+    <>
+      <Father>
+        <Box bgColor="teal">
+          <Text>Hello</Text>
+        </Box>
+        <Circle bgColor="tomato" />
+        <Btn>Log in</Btn>
+        <Btn as="a" href="/">
+          Log in
+        </Btn>
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <Box2 bgColor="black">
+          <Emoji>😄</Emoji>
+        </Box2>
+        <Emoji>🔥</Emoji>
+        <Emoji>🔥</Emoji>
+        <Emoji>🔥</Emoji>
+      </Father>
+      <Wrapper>
+        <Title>Hello</Title>
+      </Wrapper>
+    </>
   );
 }
 
