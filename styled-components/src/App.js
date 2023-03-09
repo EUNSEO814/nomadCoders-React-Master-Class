@@ -94,6 +94,7 @@ function App() {
       </Box2>
       <Emoji>🔥</Emoji>
       <Emoji>🔥</Emoji>
+      <Emoji>🔥</Emoji>
     </Father>
   );
 }
