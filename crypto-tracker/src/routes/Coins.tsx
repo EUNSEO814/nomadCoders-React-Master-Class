@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -64,7 +64,11 @@ interface ICoin {
 }
 
 const Coins = () => {
-  const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
+  const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins, {
+    select: (data) => data.slice(0, 30),
+  });
+  console.log(isLoading, data);
+
   /**
   const [coins, setCoins] = useState<ICoin[]>([]);
   const [loading, setLoading] = useState(true);
@@ -85,7 +89,7 @@ const Coins = () => {
         <Title>Coins</Title>
       </Header>
       {isLoading ? (
-        <Loader>Loading...</Loader>
+        <Loader>Loading....</Loader>
       ) : (
         <CoinsList>
           {data?.map((coin) => (
