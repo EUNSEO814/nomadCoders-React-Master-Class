@@ -8,6 +8,7 @@ import {
   useParams,
   Link,
   useRouteMatch,
+  useHistory,
 } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
@@ -76,6 +77,14 @@ const Tab = styled.span<{ isActive: boolean }>`
   a {
     display: block;
   }
+`;
+
+const Btn = styled.button`
+  border: 0;
+  background-color: transparent;
+  color: ${(props) => props.theme.accentColor};
+  font-size: 48px;
+  text-align: center;
 `;
 interface RouteParams {
   coinId: string;
@@ -167,6 +176,13 @@ const Coin = () => {
   );
 
   const loading = infoLoading || tickersLoading;
+
+  const history = useHistory();
+  const clickHandler = () => {
+    console.log("clicked");
+    history.goBack();
+    // router v6로 바꿀때 useNavigate()로 변경하기
+  };
   /**
    
   const [loading, setLoading] = useState(true);
@@ -201,6 +217,7 @@ const Coin = () => {
           sizes="16x16"
         />
       </Helmet>
+      <Btn onClick={clickHandler}>&larr;</Btn>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
