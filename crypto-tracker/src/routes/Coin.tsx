@@ -1,4 +1,5 @@
 // import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useQuery } from "react-query";
 import {
   Switch,
@@ -82,6 +83,7 @@ interface RouteParams {
 
 interface RouteState {
   name: string;
+  symbol: string;
 }
 // interface ITag {
 //   coin_counter: number;
@@ -148,7 +150,7 @@ interface IPriceData {
 const Coin = () => {
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
-  //   console.log(state.name);
+  // console.log("state", state);
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
 
@@ -158,7 +160,10 @@ const Coin = () => {
   );
   const { isLoading: tickersLoading, data: tickersData } = useQuery<IPriceData>(
     ["tickers", coinId],
-    () => fetchCoinTickers(coinId)
+    () => fetchCoinTickers(coinId),
+    {
+      refetchInterval: 5000,
+    }
   );
 
   const loading = infoLoading || tickersLoading;
@@ -185,6 +190,17 @@ const Coin = () => {
   */
   return (
     <Container>
+      <Helmet>
+        <title>
+          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+        </title>
+        <link
+          rel="icon"
+          type="image/png"
+          href={`https://coinicons-api.vercel.app/api/icon/${state?.symbol}`}
+          sizes="16x16"
+        />
+      </Helmet>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
@@ -204,8 +220,8 @@ const Coin = () => {
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>Price:</span>
+              <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -234,7 +250,7 @@ const Coin = () => {
               <Price />
             </Route>
             <Route path={`/${coinId}/chart`}>
-              <Chart />
+              <Chart coinId={coinId} />
             </Route>
           </Switch>
         </>
