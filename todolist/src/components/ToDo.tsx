@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState } from "./atoms";
+import { Categories, IToDo, toDoState } from "./atoms";
 
 // option 1
 const ToDo = ({ text, category, id }: IToDo) => {
@@ -12,12 +12,7 @@ const ToDo = ({ text, category, id }: IToDo) => {
       //   const oldToDo = oldToDos[targetIndex];
       const newToDo = { text, id, category: newCategory };
       //   console.log("oldToDo:", oldToDo, "newToDo:", newToDo);
-      console.log(
-        "replace th to do in the index",
-        targetIndex,
-        "with",
-        newToDo
-      );
+      //   console.log("replace th to do in the index",targetIndex,"with",newToDo);
       return [
         ...oldToDos.slice(0, targetIndex),
         newToDo,
@@ -25,18 +20,23 @@ const ToDo = ({ text, category, id }: IToDo) => {
       ];
     });
   };
+
+  const deleteHandler = () => {
+    setToDos((todos) => todos.filter((todo) => todo.id !== id));
+  };
   return (
     <li>
       <span>{text}</span>
-      {category !== "TO_DO" && (
-        <button onClick={() => onClick("TO_DO")}>TO DO</button>
+      {category !== Categories.TO_DO && (
+        <button onClick={() => onClick(Categories.TO_DO)}>TO DO</button>
       )}
-      {category !== "DOING" && (
-        <button onClick={() => onClick("DOING")}>DOING</button>
+      {category !== Categories.DOING && (
+        <button onClick={() => onClick(Categories.DOING)}>DOING</button>
       )}
-      {category !== "DONE" && (
-        <button onClick={() => onClick("DONE")}>DONE</button>
+      {category !== Categories.DONE && (
+        <button onClick={() => onClick(Categories.DONE)}>DONE</button>
       )}
+      <button onClick={deleteHandler}>DELETE</button>
     </li>
   );
 };
