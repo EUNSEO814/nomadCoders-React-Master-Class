@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import Selector from "./components/Selector";
 import ToDoList from "./components/ToDoList";
 
 const GlobalStyle = createGlobalStyle`
@@ -61,6 +62,7 @@ function App() {
     <>
       <GlobalStyle />
       <ToDoList />
+      <Selector />
     </>
   );
 }
