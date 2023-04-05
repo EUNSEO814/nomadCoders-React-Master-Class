@@ -86,6 +86,10 @@ const Btn = styled.button`
   font-size: 48px;
   text-align: center;
 `;
+
+const BtnSt = styled.span`
+  font-size: 48px;
+`;
 interface RouteParams {
   coinId: string;
 }
@@ -185,6 +189,7 @@ const Coin = ({}: ICoinProps) => {
     history.goBack();
     // router v6로 바꿀때 useNavigate()로 변경하기
   };
+  // const clickToHomeHandler = () => {};
   /**
    
   const [loading, setLoading] = useState(true);
@@ -220,6 +225,10 @@ const Coin = ({}: ICoinProps) => {
         />
       </Helmet>
       <Btn onClick={clickHandler}>&larr;</Btn>
+      <Link to={`/`}>
+        <BtnSt>🏠</BtnSt>
+      </Link>
+      {/* <Btn onClick={clickToHomeHandler}>🏠</Btn> */}
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
