@@ -160,9 +160,9 @@ interface IPriceData {
   };
 }
 
-interface ICoinProps {}
+// interface ICoinProps {}
 
-const Coin = ({}: ICoinProps) => {
+const Coin = () => {
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
   // console.log("state", state);

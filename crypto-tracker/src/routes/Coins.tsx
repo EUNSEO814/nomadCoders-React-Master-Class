@@ -65,7 +65,7 @@ interface ICoin {
   is_active: boolean;
   type: string;
 }
-interface ICoinsProps {}
+// interface ICoinsProps {}
 
 const Coins = () => {
   const setDarkAtom = useSetRecoilState(isDarkAtom);
