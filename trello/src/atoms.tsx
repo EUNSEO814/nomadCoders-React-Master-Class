@@ -1,5 +1,10 @@
 import { atom } from "recoil";
 
+export const isDarkAtom = atom({
+  key: "isDark",
+  default: false,
+});
+
 export interface IToDo {
   id: number;
   text: string;
